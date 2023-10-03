@@ -6,9 +6,12 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import com.example.chatapp.Constants
 import com.example.chatapp.R
 import com.example.chatapp.databinding.ActivityHomeBinding
+import com.example.chatapp.model.Room
 import com.example.chatapp.ui.add_room.AddRoomActivity
+import com.example.chatapp.ui.chat.ChatActivity
 import com.example.chatapp.ui.login.LoginActivity
 import com.example.chatapp.ui.showLoadingProgressDialog
 import com.example.chatapp.ui.showMessage
@@ -93,5 +96,16 @@ class HomeActivity : AppCompatActivity() {
         viewBinding.vm = viewModel
         viewBinding.lifecycleOwner = this
         viewBinding.content.roomsRv.adapter = adapter
+
+        adapter.onItemClickListener = RoomsRecyclerAdapter.OnItemClickListener { position, room ->
+
+            navigateToRoom(room)
+        }
+    }
+
+    private fun navigateToRoom(room: Room?) {
+        val intent = Intent(this, ChatActivity::class.java)
+        intent.putExtra(Constants.EXTRA_ROOM, room)
+        startActivity(intent)
     }
 }

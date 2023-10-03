@@ -13,7 +13,7 @@ class SplashViewModel : ViewModel() {
     val event = SingleLiveEvent<SplashViewEvent>()
 
     fun redirect() {
-        
+
         if (Firebase.auth.currentUser == null) {
             event.postValue(SplashViewEvent.NavigateToLogin)
             return
@@ -28,6 +28,7 @@ class SplashViewModel : ViewModel() {
             }
             val user = task.result.toObject(User::class.java)
             SessionProvider.user = user
+            
             event.postValue(SplashViewEvent.NavigateToHome)
         }
     }

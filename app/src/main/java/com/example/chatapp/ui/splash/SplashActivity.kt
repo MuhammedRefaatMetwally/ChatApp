@@ -19,7 +19,9 @@ class SplashActivity : AppCompatActivity() {
         subscribeToLiveData()
         Handler(mainLooper).postDelayed({
             viewModel.redirect()
+
         }, 2500)
+
     }
 
     private fun subscribeToLiveData() {
@@ -27,10 +29,12 @@ class SplashActivity : AppCompatActivity() {
             when (it) {
                 SplashViewEvent.NavigateToLogin -> {
                     startLoginActivity()
+                    finish()
                 }
 
                 SplashViewEvent.NavigateToHome -> {
                     startHomeActivity()
+                    finish()
                 }
             }
         }
@@ -39,10 +43,12 @@ class SplashActivity : AppCompatActivity() {
     private fun startHomeActivity() {
         val intent = Intent(this, HomeActivity::class.java)
         startActivity(intent)
+
     }
 
     private fun startLoginActivity() {
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
+
     }
 }

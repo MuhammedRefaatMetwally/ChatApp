@@ -25,7 +25,7 @@ class RegisterViewModel : ViewModel() {
 
     val events = SingleLiveEvent<RegisterViewEvent>()
 
-    val auth = Firebase.auth
+    private val auth = Firebase.auth
 
 
     fun register() {

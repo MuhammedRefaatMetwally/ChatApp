@@ -29,7 +29,6 @@ class LoginViewModel : ViewModel() {
         isLoading.value = true
         auth.signInWithEmailAndPassword(email.value!!, password.value!!)
             .addOnCompleteListener { task ->
-
                 if (task.isSuccessful) {
                     getUserFromFireStore(task.result.user?.uid)
                 } else {

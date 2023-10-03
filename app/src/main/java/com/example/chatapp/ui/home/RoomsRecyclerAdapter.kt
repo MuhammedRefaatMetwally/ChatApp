@@ -18,7 +18,7 @@ class RoomsRecyclerAdapter(var rooms: List<Room?>? = emptyList()) :
             itemBinding.catImage.setImageResource(Category.getCategoryImageByCategoryId(room?.categoryId))
             itemBinding.title.text = room?.title
         }
-        
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -33,10 +33,21 @@ class RoomsRecyclerAdapter(var rooms: List<Room?>? = emptyList()) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.bind(rooms?.get(position))
+        onItemClickListener?.let {
+            holder.itemView.setOnClickListener { view ->
+                it.onItemClick(position, rooms!![position])
+            }
+        }
     }
 
-    fun changeData(rooms: List<Room>?) {
+    fun changeData(rooms: List<Room?>?) {
         this.rooms = rooms
         notifyDataSetChanged()
+    }
+
+    var onItemClickListener: OnItemClickListener? = null
+
+    fun interface OnItemClickListener {
+        fun onItemClick(position: Int, room: Room?)
     }
 }

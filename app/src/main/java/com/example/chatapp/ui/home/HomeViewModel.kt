@@ -23,7 +23,6 @@ class HomeViewModel : ViewModel() {
     fun getRooms() {
         RoomsDao.getAllRooms { task ->
             if (!task.isSuccessful) {
-
                 return@getAllRooms
             }
             val rooms = task.result.toObjects(Room::class.java)

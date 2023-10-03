@@ -3,11 +3,16 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
     id 'com.google.gms.google-services'
+    id 'kotlin-parcelize'
 }
 
 android {
     namespace 'com.example.chatapp'
     compileSdk 33
+
+    packagingOptions {
+        resources.excludes.add("META-INF/*")
+    }
 
     defaultConfig {
         applicationId "com.example.chatapp"
@@ -40,6 +45,7 @@ android {
 }
 
 dependencies {
+    implementation 'androidx.databinding:databinding-compiler-common:8.0.2'
     def lifecycle_version = "2.6.2"
     // ViewModel
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
@@ -52,6 +58,12 @@ dependencies {
     implementation("com.google.firebase:firebase-firestore-ktx")
 
     implementation 'androidx.fragment:fragment-ktx:1.6.1'
+
+    // reflection-based flavor
+    implementation 'com.github.kirich1409:viewbindingpropertydelegate-full:1.5.9'
+
+    // reflection-free flavor
+    implementation 'com.github.kirich1409:viewbindingpropertydelegate-noreflection:1.5.9'
 
 
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$lifecycle_version"
